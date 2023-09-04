@@ -23,27 +23,29 @@
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarNav">
-		  	<form class="form-inline my-2 my-lg-0" action="/search">
+		  	
+			<form class="form-inline my-2 my-lg-0" action="/search">
 		      <div class="input-group">
 				  <input name="q" type="text" class="form-control" placeholder="search" />
 				  <div class="input-group-append">
 				    <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
 				  </div>
 				</div>
-		    </form>
+		    </form> 
+
 		    <ul class="navbar-nav ml-auto">
 		      <li class="nav-item">
 		        <a class="nav-link text-white" href="/">Home</a>
 		      </li>
 		      <li class="nav-item">
 		       
-				{% comment %} <a class="nav-link text-white" href="{% url 'category-list' %}">Categories</a> {% endcomment %}
-				{% comment %} <a class="nav-link text-white" href="{% url 'category-list' %}">Categories</a>  {% endcomment %}
+				{% comment %} <a class="nav-link text-white" href="{% url 'category_list' %}">Categories</a> {% endcomment %}
+				{% comment %} <a class="nav-link text-white" href="{% url 'category_list' %}">Categories</a>  {% endcomment %}
 				<a class="nav-link text-white" href="{% url 'category_list' %}">Categories</a> 
 		      </li>
 		      <li class="nav-item">
 		        <a class="nav-link text-white" href="{% url 'brand_list' %}">Brands</a>
-				{% comment %} <a class="nav-link text-white" href="{% url 'brand-list' %}">Brands</a> {% endcomment %}
+				{% comment %} <a class="nav-link text-white" href="{% url 'brand_list' %}">Brands</a> {% endcomment %}
 		      </li>
 		      <li class="nav-item">
 		        {% comment %} <a class="nav-link text-white" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart (<span class="cart-list">{{request.session.cartdata|length}}</span>)</a> {% endcomment %}

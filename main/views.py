@@ -25,18 +25,10 @@ def brand_list(request):
 #Product list   viwe all products and filter
 def product_list(request):
     data=Product.objects.all().order_by('-id')
-    cats=Product.objects.distinct().values('category__title','category__id')
-    brands=Product.objects.distinct().values('brand__title','brand__id')
-    colors=Product.objects.distinct().values('color__title','color__color_code')
-    sizes=Product.objects.distinct().values('size__title','size__id')
     # return render(request,'product_list.html',{'data':data})
     return render(request,'product_list.html',
         {
             'data':data,
-            'cats':cats,
-            'brands':brands,
-            'colors':colors,
-            'sizes':sizes,
         }         
         )
 
@@ -50,13 +42,10 @@ def category_product_list(request,cat_id):
 def brand_product_list(request,brand_id):
     brand=Brand.objects.get(id=brand_id)
     data=Product.objects.filter(brand=brand).order_by('-id')
-    # cats=Product.objects.distinct().values('category__title','category__id')
-    # brands=Product.objects.distinct().values('brand__title','brand__id')
-    # colors=Product.objects.distinct().values('color__title','color__color_code')
-    # sizes=Product.objects.distinct().values('size__title','size__id')
     return render(request,'category_product_list.html',{'data':data})
 
 #Product details
 def product_detail(request,slug,id):
-    product=Product.objects.get(id=id)
-    return render(request,'product_detail.html',{'data':product})
+    slug=Product.objects.get(slug=slug)
+    data=Product.objects.get(id=id)
+    return render(request,'product_detail.html',{'data':data})

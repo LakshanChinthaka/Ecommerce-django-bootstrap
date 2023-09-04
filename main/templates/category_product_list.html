@@ -5,7 +5,7 @@
 	<div class="row">
 		<!-- Filters -->
 		<div class="col-md-3">
-			{% comment %} {% include 'filters.html' %} {% endcomment %}
+			{% include 'filters.html' %}
 		</div>
 		<div class="col-md-9">
 			<!-- Products -->
@@ -17,9 +17,9 @@
 				{% for product in data %}
 				<div class="col-lg-4 col-md-6 mb-4 product-box">
 					<div class="card shadow">
-						<a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.title}}"></a>
+						{% comment %} <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.title}}"></a> {% endcomment %}
 
-						{% comment %} <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a> {% endcomment %}
+						<a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a>
                         {% comment %} <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a> {% endcomment %}
 					  <div class="card-body">
 					    <h5 class="card-text"><a href="/product/{{product.slug}}/{{product.id}}">{{product.title}}</a></h5>

@@ -45,8 +45,8 @@
     {% for product in data %}
 		<div class="col-md-3 mb-4">
 			<div class="card shadow">		 
-        {% comment %} <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a> {% endcomment %}
-        <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.title}}"></a>
+        <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a>
+        {% comment %} <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.image}}" class="card-img-top" alt="{{product.title}}"></a> {% endcomment %}
 			    <div class="card-body">
 			      <h5 class="card-text"><a href="/product/{{product.slug}}/{{product.id}}">{{product.title}}</a></h5>
             <h6>$ <span class="product-price-{{product.id}}">{{product.productattribute_set.first.price}}</span></h6>

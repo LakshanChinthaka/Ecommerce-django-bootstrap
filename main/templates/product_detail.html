@@ -12,7 +12,7 @@
 			<img id="zoom_01" data-zoom-image="/media/{{data.productattribute_set.first.image}}" src="/media/{{data.productattribute_set.first.image}}" class="card-img-top" alt="{{data.title}}">
 		</div>
 		<div class="col-md-8">
-			<p>{{data.detail}}</p>
+			<p>{{data.details}}</p>
 			<hr/>
 			<table class="table table-bordered">
 				<tr>
@@ -57,11 +57,11 @@
 			<table class="table table-bordered">
 				<tr>
 					<th>Brand</th>
-					<td><a href="/brand-product-list/{{data.brand.id}}">{{data.brand.title}}</a></td>
+					<td><a href="/brand_product_list/{{data.brand.id}}">{{data.brand.title}}</a></td>
 				</tr>
 				<tr>
 					<th>Category</th>
-					<td><a href="/category-product-list/{{data.category.id}}">{{data.category.title}}</a></td>
+					<td><a href="/category_product_list/{{data.category.id}}">{{data.category.title}}</a></td>
 				</tr>
 				<tr>
 					<th>Specification</th>
