@@ -99,4 +99,4 @@ class ProductAttribute(models.Model):
     
     def image_tag(self):
         return mark_safe('<img src="%s" width="80" height="70"/>' % (self.image.url))
-    
+  
