@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+
 <main class="container my-4">
 
 	<!-- Featured Products -->
@@ -163,10 +164,10 @@
 </main>
 
 <!-- Image Zoom -->
-<script src="{% static 'jquery.ez-plus.js' %}"></script>
+{% comment %} <script src="{% static 'jquery.ez-plus.js' %}"></script>
 <script type="text/javascript">
     $('#zoom_01').ezPlus();
-</script>
+</script> {% endcomment %}
 
 <!-- Add To Cart -->
 <script src="{% static 'custom.js' %}"></script>
