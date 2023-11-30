@@ -32,6 +32,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_tools_stats',  # this must be BEFORE 'admin_tools' and 'django.contrib.admin'
+    'django_nvd3',
+
+    ###
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +45,37 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    # 'login',
+    #google signin
+    # The following apps are required:
+    # 'django.contrib.sites',
+    # # # 'django.contrib.auth',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'social_django',
+    'paypal.standard.ipn',
+    'django_bootstrap_icons',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
+    'rangefilter',
+    
+    ###
 ]
+# SITE_ID = 1
+
+# SOCIALACCOUNT_PROVIDER = {
+#     "google":{
+#         "SCOPE":[
+#             "profile",
+#             "email"
+#         ],
+#         "AUTH_PARAMS":{"access_type":"online"}
+#     }
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +85,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
+    # 'allauth.account.middleware.AccountMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
@@ -82,6 +121,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
@@ -118,7 +159,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )
@@ -126,7 +167,43 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+# user after login user redirect to home page
+LOGIN_REDIRECT_URL = 'home'
+# user after logout user redirect to login page
+LOGOUT_REDIRECT_URL = 'login'
+
+#paypal configuratiom
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# AUTHENTICATION_BACKENDS = [
+
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
+
+# user after login user redirect to home page
+# LOGIN_REDIRECT_URL = '/'
+# # user after logout user redirect to login page
+# LOGOUT_REDIRECT_URL = '/'
+
+PAYPAL_RECEIVER_EMAIL = 'sb-sx5mf27580923@business.example.com'
+PAYPAL_TEST = True
+
+JET_SIDE_MENU_COMPACT = True
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+# AUTH_USER_MODEL = 'main.CustomStaff'

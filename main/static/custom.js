@@ -34,6 +34,7 @@ $(document).ready(function(){
 
 	// Show size according to selected color
 	$(".choose-color").on('click',function(){
+
 		$(".choose-size").removeClass('active');
 		$(".choose-color").removeClass('focused');
 		$(this).addClass('focused');
@@ -97,6 +98,7 @@ $(document).ready(function(){
 				_vm.attr('disabled',false);
 			}
 		});
+		
 		// End
 	});
 	// End
@@ -105,7 +107,7 @@ $(document).ready(function(){
 	$(document).on('click','.delete-item',function(){
 		var _pId=$(this).attr('data-item');
 		var _vm=$(this);
-		// Ajax
+		// Ajax- used to send to request to server
 		$.ajax({
 			url:'/delete-from-cart',
 			data:{

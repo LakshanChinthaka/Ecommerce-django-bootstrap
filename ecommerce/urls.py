@@ -17,7 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+# from django.views.generic import TemplateView
+
 urlpatterns = [
+    # path('', TemplateView.as_view(template_name='login/login.html')),
+    path('jet/', include('jet.urls')),
+    path('jet/dashboaard', include('jet.dashboard.urls','jet-dashboard')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
+    path('admin_tools_stats/', include('admin_tools_stats.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    #google and facebook sign in url
+    # path('accounts/', include('allauth.urls')),
+    # path('/', include("users.urls")),
+    path("__reload__/", include("django_browser_reload.urls")),
+    # path('', include("main.urls")),
 ]

@@ -10,7 +10,7 @@
 
 		<!-- Images -->
 		<div class="col-md-4">
-			<img id="zoom_01" data-zoom-image="/media/{{data.productattribute_set.first.image}}" src="/media/{{data.productattribute_set.first.image}}" class="card-img-top" alt="{{data.title}}">
+			<img src="/media/{{data.productattribute_set.first.image}}" class="card-img-top" alt="{{data.title}}">
 		</div>
 		<div class="col-md-8">
 			<p>{{data.details}}</p>
@@ -112,7 +112,7 @@
 	</div>
 
 	<!-- Product Review End -->
-	{% endif %}
+	 {% endif %}
 			</h3>
 			<div class="card">
 				<div class="card-body review-list" style="max-height: 400px; overflow: auto;">
@@ -137,7 +137,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> 
 
 	<!-- Related Products -->
 	<h3 class="mt-4 mb-3 border-bottom pb-1">Related Products</h3>
@@ -145,10 +145,12 @@
 		{% for product in related %}
 		<div class="col-lg-3 col-sm-4 mb-4">
 			<div class="card shadow">
+				
 			  <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a>
 			  <div class="card-body">
 			    <h6 class="card-text"><a href="/product/{{product.slug}}/{{product.id}}">{{product.title}}</a></h6>
 			  </div>
+
 			  <div class="card-footer">
 			  	<button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i></button>
 			  	<button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
@@ -157,17 +159,13 @@
 			  		<i class="fa fa-star text-warning"></i>
 			  	</span>
 			  </div>
+
 			</div>
 		</div>
 		{% endfor %}
 	</div>
 </main>
 
-<!-- Image Zoom -->
-{% comment %} <script src="{% static 'jquery.ez-plus.js' %}"></script>
-<script type="text/javascript">
-    $('#zoom_01').ezPlus();
-</script> {% endcomment %}
 
 <!-- Add To Cart -->
 <script src="{% static 'custom.js' %}"></script>
