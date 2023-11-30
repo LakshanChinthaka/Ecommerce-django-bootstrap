@@ -1,4 +1,5 @@
 {% load static %}
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,67 +15,75 @@
 	<!-- CustomJs -->
 	<link rel="stylesheet" type="text/css" href="{% static 'custom.css' %}" />
 	<script type="text/javascript" src="{% static 'custom.js' %}"></script>
-
-	{% comment %} <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> {% endcomment %}
-
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
 </head>
-<body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<body >
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
-		  <a class="navbar-brand" href="/">Bottle Shop</a>
+	
+		  <h3 class="display-6 pr-4 text-white bg-slate-400" href="/">BAUHINIA</h3>
+		 
 		 
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
 		  </button>
 		  
-		  <div class="collapse navbar-collapse" id="navbarNav">
+		  <div class="collapse navbar-collapse " id="navbarNav">
 		  	
 			<form class="form-inline my-2 my-lg-0" action="/search">
 		      <div class="input-group">
-				  <input name="q" type="text" class="form-control" placeholder="search" />
+				  <input name="q" type="text" class="form-control rounded-pill" placeholder="search" />
 				 
 				  <div class="input-group-append">
-				    <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
+				    <button class="btn btn-warning rounded-pill ml-2 pl-3 pr-3" type="submit" id="button-addon2">Search</button>
 				  </div>
 				
 				</div>
 		    </form> 
-
+			
+	
 		    <ul class="navbar-nav ml-auto">
 		      <li class="nav-item">
-		        <a class="nav-link text-white" href="/">Home</a>
+		        <a class="nav-link text-white font-weight-bold" href="/">Home</a>
 		      </li>
 
 		      <li class="nav-item">
-				<a class="nav-link text-white" href="{% url 'category_list' %}">Categories</a> 
+				<a class="nav-link text-white font-weight-bold" href="{% url 'category_list' %}">Categories</a> 
 		      </li>
 
 		      <li class="nav-item">
-		        <a class="nav-link text-white" href="{% url 'brand_list' %}">Brands</a>
+		        <a class="nav-link text-white font-weight-bold" href="{% url 'brand_list' %}" class="fa fa-home fa-fw">Brands</a>
 		      </li>
 
 		      <li class="nav-item">
-		        <a class="nav-link text-white" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart (<span class="cart-list">{{request.session.cartdata|length}}</span>)</a>
+		        <a class="nav-link text-white font-weight-bold" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart (<span class="cart-list">{{request.session.cartdata|length}}</span>)</a>
 		      </li>
 
-		      <li class="nav-item dropdown">
-		        <a class="nav-link text-white dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          <i class="fa fa-user"></i> My Account
-		        </a>
-		      
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		        {% comment %} "user.is_authenticated" is a django funtion it is user cheack user is login {% endcomment %}
+			  {% if user.is_authenticated and not user.is_staff %}
+			  <li class="nav-item">
+		        <a class="nav-link text-white font-weight-bold"  href="{% url 'my_dashboard' %}">My Dashboard</a>
+		      </li>
+			  {% endif %}
+
+			  {% if user.is_authenticated and user.is_staff %}
+			  <li class="nav-item">
+				<a href="{% url 'order_bar_chart' %}" class="nav-link text-white font-weight-bold {% if request.path == '/order_bar_chart' %}active {% endif %}">Report</a>
+		  		{% endif %}
+			  
+			  	{% if user.is_authenticated and user.is_staff %}
+			  <li class="nav-item">
+				<a  class="nav-link text-white font-weight-bold"  href="{% url 'admin:index' %}">Admin Dashboard</a>
+			 </li>
+		  		{% endif %}
 					{% if user.is_authenticated %}
-		        	{% comment %} <a class="dropdown-item" href="{% url 'my_dashboard' %}">Dashboard</a> {% endcomment %}
-		        		<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+						<a class="nav-link text-white btn-danger pl-3 pr-3 pt--1 pb--1 rounded " href="{% url 'logout' %}">Logout</a>
 	        		{% else %}
-	        			<a class="dropdown-item" href="{% url 'login' %}">Login</a>
-		            	<a class="dropdown-item" href="{% url 'signup' %}">Signup</a>
+	        			<a class="nav-link text-white btn-success pl-3 pr-3 pt--2 pb--1 rounded " href="{% url 'login' %}">Login</a>
+		            	<a class="nav-link text-white btn-dark pl-3 pr-3 pt--1 pb--1 ml-2 rounded"  href="{% url 'signup' %}">SignUp</a>
 		       		{% endif %}
-		        </div>
+			</div>
 		    </ul>
 		  </div>
 		</div>
@@ -86,8 +95,8 @@
 <footer class="pt-4 my-md-5 pt-md-5 border-top container">
     <div class="row">
         <div class="col-12 col-md">
-        <a href="#">Bottle Shop</a>
-        <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+        <a href="#">Bauhinia</a>
+        <small class="d-block mb-3 text-muted">&copy; 2013-2024</small>
         </div>
         <div class="col-6 col-md">
         <h5>Features</h5>
@@ -120,5 +129,10 @@
         </div>
     </div>
     </footer>
+
 </body>
+
 </html>
+
+<style>
+</style>

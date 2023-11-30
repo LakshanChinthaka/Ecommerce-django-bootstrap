@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container my-4">
+	<!-- Featured Products -->
+	<h3 class="my-4 border-bottom pb-1">Daily Report</h3>
+	
+	<div class="row">
+
+		<div class="col-md-3">
+            {% include 'adminDashboard\side-bar.html' %}
+		</div>
+		<div class="col-md-9">
+			
+            <form method="get" action="{% url 'daily_report' %}">
+                <div class="form-outline d-flex"  style="width: 40%;">
+                    <input type="date" class="form-control" name="date" id="date" value="{{ selected_date }}">
+                    {% comment %} <button class="" type="submit">Submit</button> {% endcomment %}
+                    <button type="submit" class="btn btn-primary ml-3">Search</button>
+                </div>
+        
+            </form method="get" action="{% url 'daily_report' %}">
+                    
+        <!-- List of Orders for the Selected Date -->
+        <div class="d-flex mt-4">
+            <h5 class="mr-4">Orders for :  {{ selected_date }}</h5>
+            <h5 class="mr-5 ml-5">Total Orders : {{ total_orders }}</h5>
+            <h5  class="ml-5">Total Amount : Rs. {{ total_income }}</h5>
+			{% comment %} <a href="{% url 'generate_daily_report_pdf' %}?date={{ selected_date }}" class="btn btn-primary p-1 m-1">Download PDF</a> {% endcomment %}
+			<a href="{% url 'total_product_report_pdf' %}">Download All Orders PDF</a>
+        </div>
+       
+	<!-- Featured Products -->
+			<div class="table-responsive">
+				<table class="table">
+					<thead class="table-info ">
+						<tr>
+							<th>Order No</th>
+							<th>Total Amount</th>
+							<th>Payment Status</th>
+							<th>Payment Method</th>
+							<th>Order Status</th>
+							<th>Order Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for order in orders %}
+						<tr>
+							<td><a href="{% url 'my_order_items' order.id %}" class="btn btn-sm btn-dark">{{order.id}}</a></td>
+							<td>{{order.total_amt}}</td>
+							<td class=" text-center">
+								{% if order.paid_status %}
+									Paid
+								{% else %}
+									Not yet Paid
+								{% endif %}
+							</td>
+							
+							<td class=" text-center">
+								{% if order.payment_method == 'cod' %}
+									Cash on Delivery
+								{% else %}
+									Online
+								{% endif %}
+							</td>
+							
+							<td class="text-center {% if order.order_status == 'Rejected' or order.order_status == 'Returned' %}text-danger{% endif %}  {% if order.order_status == 'deliverd' or order.order_status == 'Dispatched' %}text-success{% endif %}">
+								{% if order.order_status == 'deliverd' %}
+									Deliverd
+								{% elif order.order_status == 'Dispatched' %}
+									Dispatched
+								{% elif order.order_status == 'Rejected' %}
+									Rejected
+								{% elif order.order_status == 'Returned' %}
+									Returned
+								{%else%}
+									In Process
+								{% endif %}
+							</td>
+					
+							<td  class=" text-center">{{order.order_dt}}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<!-- Display Total Orders and Income -->
+<div class="row">
+    <div class="col-md-6">
+        <p>Total Orders for {{ selected_date }}: {{ total_orders }}</p>
+    </div>
+    <div class="col-md-6">
+        <p>Total Income for:{{ selected_date }}: Rs.{{ total_income }}</p>
+    </div>
+</div>
+
+<!-- List of Orders for the Selected Date -->
+<h4 class="my-4">Orders for {{ selected_date }}</h4>
+<ul>
+    {% for order in orders %}
+        <li>Order ID: {{ order.id }}, Amount: {{ order.total_amt }}</li>
+        <!-- You can display more order details here if needed -->
+    {% empty %}
+        <li>No orders found for {{ selected_date }}</li>
+    {% endfor %}
+</ul>
+
+		</div>
+	</div> {% endcomment %}
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container my-4">
+	<!-- Featured Products -->
+	<h3 class="my-4 border-bottom pb-1">All Orders</h3>
+	<div class="row">
+		<div class="col-md-3">
+			{% include 'adminDashboard/side-bar.html' %}
+		</div>
+		<div class="col-md-9">
+			<div class="table-responsive">
+				<table class="table">
+					<thead class="table-info">
+						<tr>
+							<th>Order No</th>
+							<th>Total Amount</th>
+							<th>Payment Status</th>
+							<th>Payment Method</th>
+							<th>Order Status</th>
+							<th>Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for order in orders %}
+						<tr>
+							<td><a href="{% url 'my_order_items' order.id %}" class="btn btn-sm btn-dark">{{order.id}}</a></td>
+							<td>{{order.total_amt}}</td>
+						
+							<td class=" text-center">
+								{% if order.paid_status %}
+									Paid
+								{% else %}
+									Not yet Paid
+								{% endif %}
+							</td>
+							
+							<td class=" text-center">
+								{% if order.payment_method == 'cod' %}
+									Cash on Delivery
+								{% else %}
+									Online
+								{% endif %}
+							</td>
+							
+							<td class="text-center {% if order.order_status == 'Rejected' or order.order_status == 'Returned' %}text-danger{% endif %}  {% if order.order_status == 'deliverd' or order.order_status == 'Dispatched' %}text-success{% endif %}">
+								{% if order.order_status == 'deliverd' %}
+									Deliverd
+								{% elif order.order_status == 'Dispatched' %}
+									Dispatched
+								{% elif order.order_status == 'Rejected' %}
+									Rejected
+								{% elif order.order_status == 'Returned' %}
+									Returned
+								{%else%}
+									In Process
+								{% endif %}
+							</td>
+							
+
+							<td  class=" text-center">{{order.order_dt}}</td>
+						</tr>
+						
+						{% endfor %}
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

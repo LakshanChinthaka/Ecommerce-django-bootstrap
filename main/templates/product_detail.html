@@ -10,7 +10,7 @@
 
 		<!-- Images -->
 		<div class="col-md-4">
-			<img src="/media/{{data.productattribute_set.first.image}}" class="card-img-top" alt="{{data.title}}">
+			<img src="/media/{{data.productattribute_set.first.image}}" class="card-img-top" alt="{{data.title}}" >
 		</div>
 		<div class="col-md-8">
 			<p>{{data.details}}</p>
@@ -34,7 +34,7 @@
 				</tr>
 				<tr>
 					<th>Price</th>
-					<th>$ <span class="product-price-{{data.id}}">{{data.productattribute_set.first.price}}</span></th>
+					<th>Rs. <span class="product-price-{{data.id}}">{{data.productattribute_set.first.price}}</span></th>
 				</tr>
 			</table>
 			<hr/>
@@ -53,7 +53,7 @@
 	<div class="row">
 		
 		<div class="col-md-6">
-			<h3 class="my-3">Detail</h3>
+			<h3 class="my-3">Details</h3>
 			<!-- Detail -->
 			<table class="table table-bordered">
 				<tr>
@@ -141,23 +141,45 @@
 
 	<!-- Related Products -->
 	<h3 class="mt-4 mb-3 border-bottom pb-1">Related Products</h3>
-	<div class="row">
+	<div class="row" >
 		{% for product in related %}
-		<div class="col-lg-3 col-sm-4 mb-4">
+		<div class="col-lg-3 col-sm-4 mb-4" >
 			<div class="card shadow">
 				
-			  <a href="/product/{{product.slug}}/{{product.id}}"><img src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a>
+			  <a href="/product/{{product.slug}}/{{product.id}}"><img  style="width: 250px; height: 200px" src="/media/{{product.productattribute_set.first.image}}" class="card-img-top" alt="{{product.title}}"></a>
 			  <div class="card-body">
 			    <h6 class="card-text"><a href="/product/{{product.slug}}/{{product.id}}">{{product.title}}</a></h6>
 			  </div>
 
 			  <div class="card-footer">
-			  	<button class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart"></i></button>
-			  	<button class="btn btn-sm btn-danger"><i class="fa fa-heart"></i></button>
-			  	<span class="float-right">
-			  		4.5/5
-			  		<i class="fa fa-star text-warning"></i>
-			  	</span>
+				{{product.productattribute_set.first.color.title}}
+				<input
+				  type="hidden"
+				  value="1"
+				  class="form-control product-qty-{{product.id}}"
+				  id="productQty"
+				/>
+				<input
+				  type="hidden"
+				  class="product-image-{{product.id}}"
+				  value="{{product.productattribute_set.first.image}}"
+				/>
+				<input
+				  type="hidden"
+				  class="product-id-{{product.id}}"
+				  value="{{product.id}}"
+				/>
+				<input
+				  type="hidden"
+				  class="product-title-{{product.id}}"
+				  value="{{product.title}}"
+				/>
+				<button
+				  class="btn btn-primary btn-lg btn-block btn-sm add-to-cart"
+				  data-index="{{product.id}}"
+				>
+				  Add Cart
+				</button>
 			  </div>
 
 			</div>

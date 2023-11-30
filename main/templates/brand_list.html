@@ -8,10 +8,11 @@
 		{% if data %}
 			{% for brand in data %}
 			<div class="col-md-3 mb-4">
-				<div class="card shadow">
-				<a href="/brand_product_list/{{brand.id}}"><img src="/media/{{brand.image}}" class="card-img-top" alt="{{brand.title}}" /></a>
+				<div class="card shadow rounded ">
+				<a href="/brand_product_list/{{brand.id}}"><img style="width: 250px; height: 200px;" src="/media/{{brand.image}}" class="card-img-top" alt="{{brand.title}}" /></a>
 				<div class="card-body">
-					<h6 class="card-text"><a href="#">{{brand.title}}</a></h6>
+					<h6 class="card-text"><a class="text-dark " href="#">{{brand.title}}</a></h6>
+					<a href="/brand_product_list/{{brand.id}}" class="btn btn-primary btn-lg btn-block ">See Product</a>
 				</div>
 				</div>
 			</div>

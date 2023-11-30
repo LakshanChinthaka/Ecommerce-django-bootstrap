@@ -1,0 +1,23 @@
+<div class="list-group">
+  <a
+    href="{% url 'order_bar_chart' %}"
+    class="list-group-item {% if request.path == '/order_bar_chart' %}active {% endif %}"
+    >Sales Chart</a
+  >
+  <a
+    href="{% url 'all_orders' %}"
+    class="list-group-item {% if request.path == '/all-orders' %}active {% endif %}"
+    >All Orders</a
+  >
+  <a
+    href="{% url 'daily_report' %}"
+    class="list-group-item {% if request.path == '/daily-report' %}active {% endif %}"
+    >Daily Report</a
+  >
+
+  <a
+    href="{% url 'total_product_report_pdf' %}"
+    class="list-group-item {% if request.path == '/total_product_report_pdf' %}active {% endif %}"
+    >Report</a
+  >
+</div>

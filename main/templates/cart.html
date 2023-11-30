@@ -2,15 +2,21 @@
 {% load static %}
 {% block content %}
 <main class="container my-4" id="cartList">
+
 	<!-- Cart Products -->
 	<h3 class="my-4 border-bottom pb-1">Cart ({{totalitems}})</h3>
-	<table class="table table-bordered">
-		<thead>
+	<table class="table">
+		<thead class="table-info">
 			<tr>
 				<th>Product</th>
+				{% comment %} {% comment %} <th>Brand</th> {% endcomment %}
+				<th>Title</th> 
+				{% comment %} <tr>Size</tr>
+				<tr>Color</tr> {% endcomment %}
 				<th>Quantity</th>
 				<th>Price</th>
 				<th>Total</th>
+				
 			</tr>
 		</thead>
 
@@ -18,38 +24,49 @@
 			{% for product_id,item in cart_data.items %}
 			<tr>
 					
-				<td>
-					<img src="/media/{{item.image}}" width="150" />
-
-					<p><a href="/product/{{item.title|slugify}}/{{product_id}}">{{item.title}}</a></p>
+				<td>	
+					<img src="/media/{{item.image}}" width="90"  height="80" /></td>	
+					
 				</td> 
-				
-				<td>
-					<input type="number" class="product-qty-{{product_id}}" value="{{item.qty}}" style="vertical-align: bottom;" />
+
+				<td class="align-middle">
+					<p><a href="/product/{{item.title|slugify}}/{{product_id}}">{{item.title}}</a></p>
+				<td class="align-middle">
+					{% comment %} <input type="number" class="product-qty-{{product_id}}" value="{{item.qty}}" style="vertical-align: bottom;" /> {% endcomment %}
+					{% comment %} <div class="form-outline" style="width: 20px;"> {% endcomment %}
+						<input type="number" id="typeNumber" class="product-qty-{{product_id}}" value="{{item.qty}}" class="form-control form-outline " style="width: 75px;" />
+
+					{% comment %} </div> {% endcomment %}
 				
 					<button class="btn btn-sm btn-primary update-item" data-item="{{product_id}}">Update</button>
 					<button class="btn btn-sm btn-danger delete-item" data-item="{{product_id}}">Delete</button>
-			
-				</td>
-				<td>$ {{item.price}}</td>
-				<td>$ {% widthratio item.price 1 item.qty %}</td>
+						
+				</td >
+				<td class="align-middle">Rs. {{item.price}}</td>
+				<td class="align-middle" >Rs. {% widthratio item.price 1 item.qty %}</td>
 			</tr>
 			{% endfor %}
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="2"></td>
+				<td colspan="3"></td>
 				<th>Total</th>
-				<th>Rs. {{total_amt}}</th>
+				<th class="align-middle">Rs. {{total_amt}}</th>
 			</tr>
 			{% if totalitems %}
 			<tr>
-				<td colspan="4" align="right">
-					<a href="{% url 'checkout' %}" class="btn btn-dark btn-sm">Checkout</a>
+				<td colspan="5" align="right">
+					<a href="{% url 'checkout' %}" class="btn btn-success btn-sm" >Online payment</a>
+					<a href="{% url 'cod' %}" class="btn btn-dark btn-sm">Cash on Delivary</a>
 				</td>
 			</tr>
+			<tr>
+				
+			</tr>
 			{% endif %}
+
 		</tfoot>
 	</table>
+
 </main>
 {% endblock %}

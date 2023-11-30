@@ -1,20 +1,93 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-<main class="container my-4">
-	<!-- sing up -->
-	<h3 class="my-4 border-bottom pb-1">SignUp</h3>
-	<table class="table table-bordered">
-		<form method="post">
-			{% csrf_token %}
-			{{form.as_table}}
-			<tr>
-				<td colspan="2">
-					<input type="submit" value="Register" class="btn btn-primary" />
-				</td>
-			</tr>
-		</form>
-	</table>
+<main class="container mt-1">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-4 p-md-5">
+            <!-- Sign up -->
+            <h3 class="mb-4">User Registration</h3>
+
+            <form method="post">
+              {% csrf_token %} {% if error_message %}
+              <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+              </div>
+              {% endif %}
+
+              <!-- First Name -->
+              <div class="form-group">
+                <label for="{{ form.first_name.id_for_label }}" class=""
+                  >First Name:</label
+                >
+                {{ form.first_name }} {{ form.first_name.errors }}
+              </div>
+
+              <!-- Last Name -->
+              <div class="form-group">
+                <label for="{{ form.last_name.id_for_label }}"
+                  >Last Name:</label
+                >
+                {{ form.last_name }} {{ form.last_name.errors }}
+              </div>
+
+              <!-- Mobile Numbers -->
+              <div class="form-group">
+                <label for="{{ form.mobile1.id_for_label }}"
+                  >Mobile Number 1:</label
+                >
+                {{ form.mobile1 }}
+              </div>
+              <div class="form-group">
+                <label for="{{ form.mobile2.id_for_label }}"
+                  >Mobile Number 2:</label
+                >
+                {{ form.mobile2 }}
+              </div>
+
+              <!-- Address -->
+              <div class="form-group">
+                <label for="{{ form.address.id_for_label }}">Address:</label>
+                {{ form.address }}
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email:</label>
+                {{ form.email }} {{ form.email.errors }}
+              </div>
+
+              <!-- Username -->
+              <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username:</label>
+                {{ form.username }} {{ form.username.errors }}
+              </div>
+
+              <!-- Password -->
+              <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Password:</label>
+                {{ form.password1 }} {{ form.password1.errors }}
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}"
+                  >Confirm Password:</label
+                >
+                {{ form.password2 }} {{ form.password2.errors }}
+              </div>
+
+              <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
+
 {% endblock %}

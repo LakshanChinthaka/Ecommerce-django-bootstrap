@@ -1,59 +1,74 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
-<main class="container my-4" id="cartList">
-	<!-- Featured Products -->
-	<div class="row">
-		<div class="col-md-9">
-			<h3 class="my-4 border-bottom pb-1">Item ({{totalitems}})</h3>
-			<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>Product</th>
-				<th>Qty</th>
-				<th>Price</th>
-				<th>Total</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for product_id,item in cart_data.items %}
-			<tr>
-				<td>
-					<img src="/media/{{item.image}}" width="150" />
-					<p><a href="/product/{{item.title|slugify}}/{{product_id}}">{{item.title}}</a></p>
-				</td>
-				<td>
-					{{item.qty}}
-				</td>
-				<td>$ {{item.price}}</td>
-				<td>$ {% widthratio item.price 1 item.qty %}</td>
-			</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="2"></td>
-				<th>Total</th>
-				<th>Rs. {{total_amt}}</th>
-			</tr>
-			{% if totalitems %}
-			<tr>
-				<td colspan="4" align="right">
-					{{form.render}}
-				</td>
-			</tr>
-			{% endif %}
-		</tfoot>
-	</table>
-		</div>
-		<div class="col-md-3">
-			<h3 class="my-4 border-bottom pb-1">Selected Address</h3>
-			<div class="card">
-				<div class="card-body">
-					<p>{{address.address}}</p>
+	{% extends 'base.html' %}
+	{% load static %}
+	{% block content %}
+	<main class="container my-4" id="cartList">
+		<!-- Featured Products -->
+		<div class="row">
+			<div class="col-md-9">
+				<h3 class="my-4 border-bottom pb-1">Item ({{totalitems}})</h3>
+				<table class="table">
+			<thead class="table-info">
+				<tr>
+					<th>Product</th>
+					<th>Title</th> 
+					<th>Qty</th>
+					<th>Price</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product_id,item in cart_data.items %}
+				<tr>
+					<td class="align-middle">
+						<img src="/media/{{item.image}}" width="90"  height="80" />
+						
+					</td>
+
+					<td class="align-middle">
+						<p><a href="/product/{{item.title|slugify}}/{{product_id}}">{{item.title}}</a></p>
+					</td>
+
+					<td class="align-middle">
+						{{item.qty}}
+					</td>
+					<td class="align-middle">Rs. {{item.price}}</td>
+					<td class="align-middle">Rs. {% widthratio item.price 1 item.qty %}</td>
+				</tr>
+				{% endfor %}
+				<tr>
+					<td colspan="3"></td>
+					<th class="align-middle">Total</th>
+					<th class="align-middle">Rs. {{total_amt}}</th>
+				</tr>
+			</tbody>
+			<tfoot>
+				
+				{% if totalitems %}
+				 <tr>
+					{% comment %} <button class="btn btn-sm btn-primary update-item border-t-zinc-950">cash on delivary</button>	 {% endcomment %}
+					<td colspan="5" align="right">
+						{{form.render}}		
+					</td>				
+				</tr> 
+				{% endif %}
+
+
+			
+			</tfoot>
+		</table>
+			</div>
+			<div class="col-md-3">
+				<h3 class="my-4 border-bottom pb-1">Selected Address</h3>
+				<div class="card">
+					<div class="card-body">					
+						<p>{{address.user}}</p>			
+						<p>{{address.address}}</p>
+						<p>{{address.mobile}}</p>
+						<p>{{address.mobile2}}</p>
+						<a href="{% url 'my-addressbook' %}" class="nav-link text-white btn-dark pl-3 pr-3 pt--1 pb--1 ml-2 rounded text-center {% if request.path == '/my-addressbook' %}active {% endif %}">Change Address</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</main>
-{% endblock %}
+	</main>
+	{% endblock %}

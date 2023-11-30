@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container my-4">
+	<!-- Featured Products -->
+    <h1>Total Product Report</h1>
+    <p>Report generated on: {{ current_date }}</p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<!-- Display Total Orders and Income -->
+<div class="row">
+    <div class="col-md-6">
+        <p>Total Orders for {{ selected_date }}: {{ total_orders }}</p>
+    </div>
+    <div class="col-md-6">
+        <p>Total Income for:{{ selected_date }}: Rs.{{ total_income }}</p>
+    </div>
+</div>
+
+<!-- List of Orders for the Selected Date -->
+<h4 class="my-4">Orders for {{ selected_date }}</h4>
+<ul>
+    {% for order in orders %}
+        <li>Order ID: {{ order.id }}, Amount: {{ order.total_amt }}</li>
+        <!-- You can display more order details here if needed -->
+    {% empty %}
+        <li>No orders found for {{ selected_date }}</li>
+    {% endfor %}
+</ul>
+
+		</div>
+	</div> {% endcomment %}
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<main class="container my-4" id="cartList">
+  <h5>Registration successful</h5>
+  <button
+    type="button"
+    class="btn btn-primary text-capitalize"
+    style="
+      background-color: #60bdf3;
+      color: black;
+      font: bold;
+      border: 1px solid #60bdf3;
+      padding: 7px 10px;
+      text-decoration: none;
+      display: inline-block;
+    "
+  >
+    <a href="/accounts/login/" style="color: inherit; text-decoration: none"
+      >Log in</a
+    >
+  </button>
+</main>
+{% endblock %}

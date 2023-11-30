@@ -2,16 +2,17 @@
 {% load static %}
 {% block content %}
 <main class="container my-4">
-	<!-- Featured Products -->
+	<!-- category Products -->
 	<h3 class="my-4 border-bottom pb-1">Categories</h3>
 	<div class="row">
 		{% if data %}
 			{% for cat in data %}
 			<div class="col-md-3 mb-4">
-				<div class="card shadow">
-				<a href="/category_product_list/{{cat.id}}"><img src="/media/{{cat.image}}" class="card-img-top" alt="{{cat.title}}" /></a>
+				<div class="card shadow rounded">
+				<a href="/category_product_list/{{cat.id}}"><img style="width: 250px; height: 250px;" src="/media/{{cat.image}}"class="card-img-top" alt="{{cat.title}}"/></a>
 				<div class="card-body">
-					<h6 class="card-text"><a href="#">{{cat.title}}</a></h6>
+					<h6 class="card-text ml-1"><a href="#" class="text-dark">{{cat.title}}</a></h6>
+					<a href="/category_product_list/{{cat.id}}" class="btn btn-primary btn-lg btn-block ">See Product</a>
 				</div>
 				</div>
 			</div>

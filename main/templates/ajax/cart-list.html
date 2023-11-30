@@ -1,6 +1,6 @@
 <h3 class="my-4 border-bottom pb-1">Cart ({{totalitems}})</h3>
-<table class="table table-bordered">
-    <thead>
+<table class="table">
+    <thead class="table-info">
         <tr>
             <th>Product</th>
             <th>Qty</th>
@@ -11,19 +11,19 @@
     <tbody>
         {% for product_id,item in cart_data.items %}
         <tr>
-            <td>
+            <td class="align-middle">
                 <img src="/media/{{item.image}}" width="150" />
                 <p><a href="/product/{{item.title|slugify}}/{{product_id}}">{{item.title}}</a></p>
             </td>
 
-            <td>
+            <td class="align-middle">
                 <input type="number" value="{{item.qty}}" style="vertical-align: bottom;" class="product-qty-{{product_id}}" />
                 <button data-item="{{product_id}}" class="btn btn-sm btn-primary update-item">Update</i></button>
                 <button class="btn btn-sm btn-danger delete-item" data-item="{{product_id}}">Delete</i></button>
             </td>
 
-            <td>$ {{item.price}}</td>
-            <td>$ {% widthratio item.price 1 item.qty %}</td>
+            <td class="align-middle">Rs. {{item.price}}</td>
+            <td class="align-middle">Rs. {% widthratio item.price 1 item.qty %}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -31,14 +31,17 @@
     <tfoot>
         <tr>
             <td colspan="2"></td>
-            <th>Total</th>
-            <th>$ {{total_amt}}</th>
+            <th class="align-middle">Total</th>
+            <th class="align-middle">Rs. {{total_amt}}</th>
         </tr>
         {% if totalitems %}
 
         <tr>
-            <td colspan="4" align="right">
-                <a href="#" class="btn btn-dark btn-sm">Checkout <i class="fa fa-long-arrow-alt-right"></i></a>
+            <td colspan="5" align="right">
+                <a href="{% url 'checkout' %}" class="btn btn-success btn-sm" >Online payment</a>
+                <a href="{% url 'cod' %}" class="btn btn-dark btn-sm">Cash on Delivary</a>
+                {% comment %} <a href="{% url 'checkout' %}" class="btn btn-dark btn-sm">Place Order</a> {% endcomment %}
+                {% comment %} <a href="#" class="btn btn-dark btn-sm">Checkout <i class="fa fa-long-arrow-alt-right"></i></a> {% endcomment %}
             </td>
         </tr>
         {% endif %}
