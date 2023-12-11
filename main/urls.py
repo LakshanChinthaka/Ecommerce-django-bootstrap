@@ -50,6 +50,8 @@ urlpatterns = [
     path('order_bar_chart/', views.order_bar_chart, name='order_bar_chart'),
     path('all-orders',views.all_orders, name='all_orders'),
     path('total_product_report_pdf/', total_product_report_pdf, name='total_product_report_pdf'),
+    path('admin-my-addressbook',views.admin_my_addressbook, name='admin-my-addressbook'),
+    path('admin-add-address',views.admin_save_address, name='admin-add-address'),
 
 
 ]

@@ -347,6 +347,25 @@ def admin_update_address(request,id):
 	return render(request, 'adminDashboard/update-address.html',{'form':form,'msg':msg})
 
 
+@login_required
+def admin_my_addressbook(request):
+	addbook=UserAddressBook.objects.filter(user=request.user).order_by('-id')
+	return render(request, 'adminDashboard/admin-address.html',{'addbook':addbook})
+
+@login_required
+def admin_save_address(request):
+	msg=None
+	if request.method=='POST':
+		form=AddressBookForm(request.POST)
+		if form.is_valid():
+			saveForm=form.save(commit=False)
+			saveForm.user=request.user
+			if 'status' in request.POST:
+				UserAddressBook.objects.update(status=False)
+			saveForm.save()
+			msg='Data has been saved'
+	form=AddressBookForm
+	return render(request, 'adminDashboard/admin-edit-address.html',{'form':form,'msg':msg})
 
 
 from django.shortcuts import render, redirect

@@ -26,4 +26,10 @@
     class="list-group-item {% if request.path == '/total_product_report_pdf' %}active {% endif %}"
     >Report</a
   >
+
+  <a
+    href="{% url 'admin-my-addressbook' %}"
+    class="list-group-item {% if request.path == '/admin-my-addressbook' %}active {% endif %}"
+    >Address Book</a
+  >
 </div>
