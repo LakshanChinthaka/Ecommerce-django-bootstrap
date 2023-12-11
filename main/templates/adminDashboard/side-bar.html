@@ -16,6 +16,12 @@
   >
 
   <a
+    href="{% url 'admin-profile' %}"
+    class="list-group-item {% if request.path == '/admin-edit-profile' %}active {% endif %}"
+    >Profile</a
+  >
+
+  <a
     href="{% url 'total_product_report_pdf' %}"
     class="list-group-item {% if request.path == '/total_product_report_pdf' %}active {% endif %}"
     >Report</a

@@ -317,6 +317,36 @@ def update_address(request,id):
 	form=AddressBookForm(instance=address)
 	return render(request, 'user/update-address.html',{'form':form,'msg':msg})
 
+# Admin Profile
+# Edit Profile
+def admin_profile(request):
+	msg=None
+	if request.method=='POST':
+		form=ProfileForm(request.POST,instance=request.user)
+		if form.is_valid():
+			form.save()
+			msg='Data has been saved'
+	form=ProfileForm(instance=request.user)
+	return render(request, 'adminDashboard/edit-profile.html',{'form':form,'msg':msg})
+
+
+# Update addressbook
+def admin_update_address(request,id):
+	address=UserAddressBook.objects.get(pk=id)
+	msg=None
+	if request.method=='POST':
+		form=AddressBookForm(request.POST,instance=address)
+		if form.is_valid():
+			saveForm=form.save(commit=False)
+			saveForm.user=request.user
+			if 'status' in request.POST:
+				UserAddressBook.objects.update(status=False)
+			saveForm.save()
+			msg='Data has been saved'
+	form=AddressBookForm(instance=address)
+	return render(request, 'adminDashboard/update-address.html',{'form':form,'msg':msg})
+
+
 
 
 from django.shortcuts import render, redirect
@@ -638,14 +668,13 @@ def total_product_report_pdf(request):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename=total_orders_report.pdf'
 
-    # Create the PDF object, using response as its "file."
     p = canvas.Canvas(response)
 
-    # Set up the title
+   
     p.setFont("Helvetica-Bold", 16)
     p.drawString(100, 800, 'Orders Report')
 
-    # Set up the date
+
     current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     p.setFont("Helvetica", 12)
     p.drawString(100, 780, f'Report generated on: {current_date}')
@@ -671,14 +700,14 @@ def total_product_report_pdf(request):
         p.drawString(500, y_position, order.order_status)
         # p.drawString(400, y_position, str(order.order_dt))
 
-        # Check if there is enough space for the next order, if not, start a new page
+     
         y_position -= 20
 
-    # Close the PDF object cleanly and we're done.
+    
     p.showPage()
     p.save()
 
-    # Return the response with the PDF content
+  
     return response
 
 # Bar chart

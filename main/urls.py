@@ -29,6 +29,9 @@ urlpatterns = [
     path('payment-done/', views.payment_done, name='payment_done'),
     path('payment-cancelled/', views.payment_canceled, name='payment_cancelled'),
     #User section
+   
+    path('admin-profile',views.admin_profile, name='admin-profile'),
+    
     path('my-dashboard',views.my_dashboard, name='my_dashboard'),
     path('my-orders',views.my_orders, name='my_orders'),
     path('my-orders-items/<int:id>',views.my_order_items, name='my_order_items'),
